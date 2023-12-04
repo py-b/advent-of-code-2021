@@ -48,15 +48,9 @@ line_filter <- function(coords, diag = TRUE)
   if (diag) coords else Filter(\(.) .$x1 == .$x2 || .$y1 == .$y2, coords)
 
 points <- function(line) {
-
-  x <- seq(line$x1, line$x2)
-  y <- seq(line$y1, line$y2)
-
-  if (line$x1 == line$x2) x <- rep(line$x1, length(line$y1))
-  if (line$y1 == line$y2) y <- rep(line$y1, length(line$x1))
-
+  x <- with(line, seq(x1, x2))
+  y <- with(line, seq(y1, y2))
   Map(c, x, y)
-
 }
 
 
