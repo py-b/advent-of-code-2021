@@ -69,7 +69,13 @@ decode_output <- function(output, wires) {
   output |>
     strsplit("") |>
     sapply(
-      \(.) wires[.] |> sort() |> paste(collapse = "") |> segments_to_int()
+      function(.) {
+        if (length(.) == 2) return("1")
+        if (length(.) == 4) return("4")
+        if (length(.) == 3) return("7")
+        if (length(.) == 7) return("8")
+        wires[.] |> sort() |> paste(collapse = "") |> segments_to_int()
+      }
     ) |>
     paste(collapse = "") |>
     as.integer()
